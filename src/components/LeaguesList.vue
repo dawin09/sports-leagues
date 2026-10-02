@@ -26,6 +26,8 @@ const emit = defineEmits({
       <LeagueItem v-for="index in SKELETON_COUNT" :key="`league-skeleton-${index}`" is-loading />
     </template>
 
+    <p v-else-if="leagues.length === 0">No leagues found.</p>
+
     <template v-else>
       <LeagueItem
         v-for="league in leagues"
