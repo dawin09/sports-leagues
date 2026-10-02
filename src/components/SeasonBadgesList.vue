@@ -32,9 +32,13 @@ defineProps({
     <template v-else>
       <figure v-for="season in badges" :key="season.strSeason">
         <img
-          v-if="season.strBadge"
-          :src="season.strBadge"
-          :alt="`Badge for ${season.strSeason}`"
+          class="badge-image"
+          :src="season.strBadge || '/season-badge-placeholder.svg'"
+          :alt="
+            season.strBadge
+              ? `Badge for ${season.strSeason}`
+              : `No badge available for ${season.strSeason}`
+          "
           loading="lazy"
         />
         <figcaption>{{ season.strSeason }}</figcaption>
@@ -61,9 +65,10 @@ defineProps({
     border-radius: var(--border-radius);
     transition: transform 0.2s;
 
-    img {
-      max-width: 100%;
-      height: auto;
+    .badge-image {
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
       border-radius: 8px;
       margin-bottom: 8px;
       filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
